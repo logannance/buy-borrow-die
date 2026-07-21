@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Buy Borrow Die</title>
+</head>
+<body>
+<h1>Buy Borrow Die</h1>
+<p>
+  Calculate your maximum debt-to-equity ratio and the number of years it
+  takes to reach it using the Buy Borrow Die strategy. This website is processed
+  locally on your browser, no data is transmitted.
+</p>
+<table style="display: inline-block">
+  <tr>
+    <td>
+      <label for="returns">Expected Returns %:</label>
+    </td>
+    <td>
+      <input id="returns" name="returns" type="number" value="10"
+        oninput="update()">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <label for="interest">Margin Interest Rate %:</label>
+    </td>
+    <td>
+      <input id="interest" name="interest" type="number" value="6"
+        oninput="update()">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <label for="inflation">Inflation Rate %:</label>
+    </td>
+    <td>
+      <input id="inflation" name="inflation" type="number" value="3"
+        oninput="update()">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <label for="expenses">Starting Yearly Expenses:</label>
+    </td>
+    <td>
+      <input id="expenses" name="expenses" type="number" value="50000"
+        oninput="update()">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <label for="equity">Starting Equity Balance:</label>
+    </td>
+    <td>
+      <input id="equity" name="equity" type="number" value="1000000"
+        oninput="update()">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <label for="ratio">Maximum Debt-to-Equity Ratio %:</label>
+    </td>
+    <td>
+      <input id="ratio" name="ratio" type="number" readonly disabled>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <label for="years">Years to Maximum Debt-to-Equity Ratio:</label>
+    </td>
+    <td>
+      <input id="years" type="number" readonly disabled>
+    </td>
+  </tr>
+</table>
+<h3 id="error" style="color: red"></h3>
+<p>
+  If you want a closer look
+  at the math functions used in this tool, go to my
+  <a href="https://www.desmos.com/calculator/boxhxm2d2z">Desmos Graph</a>
+</p>
+<p>
+  View the source code for this website at 
+</p>
+<script>
+  function update() {
+    returns = document.getElementById('returns').value / 100 + 1;
+    interest = document.getElementById('interest').value / 100 + 1;
+    inflation = document.getElementById('inflation').value / 100 + 1;
+    expenses = document.getElementById('expenses').value;
+    equity = document.getElementById('equity').value;
+
+    years = Math.log(Math.log(inflation / returns) /
+      Math.log(interest / returns)) /
+      Math.log(interest / inflation) - 1;
+
+    ratio = returns ** -years *
+      (interest ** (years + 1) - inflation ** (years + 1)) /
+      (interest - inflation) * expenses / equity;
+
+    if (!isFinite(ratio) || !isFinite(years) || ratio < 0 || years < 0) {
+      document.getElementById('ratio').value = ''
+      document.getElementById('years').value = ''
+      document.getElementById('error').textContent =
+        'Error: Impossible strategy, check your input';
+      return;
+    }
+
+    document.getElementById('ratio').value = ratio;
+    document.getElementById('years').value = years;
+    document.getElementById('error').textContent = ''
+  }
+</script>
+</body>
+</html>
