@@ -7,8 +7,10 @@
 <h1>Buy Borrow Die</h1>
 <p>
   Calculate your maximum debt-to-equity ratio and the number of years it
-  takes to reach it using the Buy Borrow Die strategy. This website is processed
-  locally on your browser, no data is transmitted.
+  takes to reach it using the Buy Borrow Die strategy.
+</p>
+<p>
+  This website is processed locally on your browser, no data is transmitted.
 </p>
 <table style="display: inline-block">
   <tr>
@@ -77,11 +79,13 @@
 <p>
   If you want a closer look
   at the math functions used in this tool, go to my
-  <a href="https://www.desmos.com/calculator/boxhxm2d2z">Desmos Graph</a>
+  <a href="https://www.desmos.com/calculator/boxhxm2d2z">Desmos Graph</a>.
 </p>
 <p>
-  View the source code for this website at 
+  View the entire source code on
+    <a href="https://github.com/logannance/buy-borrow-die.git">GitHub</a>.
 </p>
+<p>Created by Log</p>
 <script>
   function update() {
     returns = document.getElementById('returns').value / 100 + 1;
@@ -110,6 +114,8 @@
     document.getElementById('years').value = years;
     document.getElementById('error').textContent = ''
   }
+
+  update()
 </script>
 </body>
 </html>
