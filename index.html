@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html style="font-size: 16pt">
 <head>
+<meta charset="utf-8">
 <title>Buy Borrow Die</title>
 </head>
 <body>
@@ -12,7 +13,7 @@
 <p>
   This website is processed locally on your browser, no data is transmitted.
 </p>
-<table style="display: inline-block">
+<table>
   <tr>
     <td>
       <label for="returns">Expected Returns %:</label>
@@ -76,19 +77,930 @@
   </tr>
 </table>
 <h3 id="error" style="color: red"></h3>
+<h2>How Does This Work?</h2>
 <p>
-  If you want a closer look
-  at the math functions used in this tool, go to my
+  If you want a closer look at the math functions used in this tool, go to my
   <a href="https://www.desmos.com/calculator/boxhxm2d2z">Desmos Graph</a>.
+</p>
+<p>
+  Say you have a starting equity balance of $1,000,000, then you have an
+  expense of $50,000. Instead of selling $50,000 worth of your equity to
+  pay for it, you elect to borrow $50,000.
+</p>
+<p>
+  You now have two balances: <b>debt</b>
+</p>
+<math display="block">
+  <msub>
+    <mi>d</mi>
+    <mn>0</mn>
+  </msub>
+  <mo>=</mo>
+  <mn>50000</mn>
+</math>
+<p>
+  and <b>equity</b>
+</p>
+<math display="block">
+  <msub>
+    <mi>q</mi>
+    <mn>0</mn>
+  </msub>
+  <mo>=</mo>
+  <mn>1000000</mn>
+</math>
+</p>
+<h3>Equity</h3>
+<p>
+  Your entire equity stays invested because you chose to borrow money to pay
+  for your expenses. It grows according to your investments'
+  <b>rate of return</b>, say
+  10%.
+</p>
+<math display="block">
+  <mi>r</mi>
+  <mo>=</mo>
+  <mn>1.1</mn>
+</math>
+<p>
+  After one year, your equity is $1,100,000. After two years it's
+  $1,210,000. The function for your equity at year <math><mi>x</mi></math> is
+  simply
+</p>
+<math display="block">
+  <mrow>
+    <mi>q</mi>
+    <mo>(</mo>
+    <mi>x</mi>
+    <mo>)</mo>
+  </mrow>
+  <mo>=</mo>
+  <msub>
+    <mi>q</mi>
+    <mn>0</mn>
+  </msub>
+  <msup>
+    <mi>r</mi>
+    <mi>x</mi>
+  </msup>
+</math>
+<h3>Debt</h3>
+<p>
+  Your debt starts out at $50,000. After one year, you are charged
+  <b>interest</b> on your entire debt amount, say 6%.
+</p>
+<math display="block">
+  <mi>z</mi>
+  <mo>=</mo>
+  <mn>1.06</mn>
+</math>
+<p>
+  If your debt was $50,000, you are charged $3,000 of interest. Again, instead
+  of selling your equity to pay for this expense, you elect to borrow more
+  money! Your debt is now $53,000.
+</p>
+<p>
+  Except now you have another year of living
+  expenses you need to pay for and the price of those expenses has gone
+  up according to your <b>inflation</b> rate, say 3%.
+</p>
+<math display="block">
+  <mi>w</mi>
+  <mo>=</mo>
+  <mn>1.03</mn>
+</math>
+<p>
+  So instead of another $50,000 expense, your living expense after one year is
+  $51,500. If you add it all up, your previous debt times your inflation rate
+  plus your new expense, you get $104,500. The formula for debt at year n is
+</p>
+<math display="block">
+  <msub>
+    <mi>d</mi>
+    <mi>n</mi>
+  </msub>
+  <mo>=</mo>
+  <mi>z</mi>
+  <msub>
+    <mi>d</mi>
+    <mrow>
+      <mi>n</mi>
+      <mo>-</mo>
+      <mn>1</mn>
+    </mrow>
+  </msub>
+  <mo>+</mo>
+  <msup>
+    <mi>w</mi>
+    <mi>n</mi>
+  </msup>
+  <msub>
+    <mi>d</mi>
+    <mn>0</mn>
+  </msub>
+</math>
+<h3>Explicit Formula</h3>
+<p>
+  One problem with our debt equation is that it requires the previous year's
+  debt
+  <math>
+    <msub>
+      <mi>d</mi>
+      <mrow>
+        <mi>n</mi>
+        <mo>-</mo>
+        <mn>1</mn>
+      </mrow>
+    </msub>
+  </math>. We can find an explicit formula for debt like we have
+  for equity. Let's write out the first few years of debt and see if we find
+  a pattern.
+  <math display="block">
+    <msub>
+      <mi>d</mi>
+      <mrow>
+        <mn>1</mn>
+      </mrow>
+    </msub>
+    <mo>=</mo>
+    <mi>z</mi>
+    <msub>
+      <mi>d</mi>
+      <mrow>
+        <mn>0</mn>
+      </mrow>
+    </msub>
+    <mo>+</mo>
+    <mi>w</mi>
+    <msub>
+      <mi>d</mi>
+      <mrow>
+        <mn>0</mn>
+      </mrow>
+    </msub>
+  </math>
+</p>
+<p>
+  <math display="block">
+    <msub>
+      <mi>d</mi>
+      <mrow>
+        <mn>2</mn>
+      </mrow>
+    </msub>
+    <mo>=</mo>
+    <mi>z</mi>
+    <mo>(</mo>
+    <mi>z</mi>
+    <msub>
+      <mi>d</mi>
+      <mrow>
+        <mn>0</mn>
+      </mrow>
+    </msub>
+    <mo>+</mo>
+    <mi>w</mi>
+    <msub>
+      <mi>d</mi>
+      <mrow>
+        <mn>0</mn>
+      </mrow>
+    </msub>
+    <mo>)</mo>
+    <mo>+</mo>
+    <mi>w</mi>
+    <msub>
+      <mi>d</mi>
+      <mrow>
+        <mn>0</mn>
+      </mrow>
+    </msub>
+  </math>
+  <math display="block">
+    <mo>=</mo>
+    <msup>
+      <mi>z</mi>
+      <mn>2</mn>
+    </msup>
+    <msub>
+      <mi>d</mi>
+      <mrow>
+        <mn>0</mn>
+      </mrow>
+    </msub>
+    <mo>+</mo>
+    <mi>z</mi>
+    <mi>w</mi>
+    <msub>
+      <mi>d</mi>
+      <mrow>
+        <mn>0</mn>
+      </mrow>
+    </msub>
+    <mo>+</mo>
+    <msup>
+      <mi>w</mi>
+      <mn>2</mn>
+    </msup>
+    <msub>
+      <mi>d</mi>
+      <mrow>
+        <mn>0</mn>
+      </mrow>
+    </msub>
+  </math>
+</p>
+<p>
+  <math display="block">
+    <msub>
+      <mi>d</mi>
+      <mrow>
+        <mn>3</mn>
+      </mrow>
+    </msub>
+    <mo>=</mo>
+    <mi>z</mi>
+    <mo>(</mo>
+      <msup>
+        <mi>z</mi>
+        <mn>2</mn>
+      </msup>
+      <msub>
+        <mi>d</mi>
+        <mrow>
+          <mn>0</mn>
+        </mrow>
+      </msub>
+      <mo>+</mo>
+      <mi>z</mi>
+      <mi>w</mi>
+      <msub>
+        <mi>d</mi>
+        <mrow>
+          <mn>0</mn>
+        </mrow>
+      </msub>
+      <mo>+</mo>
+      <msup>
+        <mi>w</mi>
+        <mn>2</mn>
+      </msup>
+      <msub>
+        <mi>d</mi>
+        <mrow>
+          <mn>0</mn>
+        </mrow>
+      </msub>
+    <mo>)</mo>
+    <mo>+</mo>
+    <msup>
+      <mi>w</mi>
+      <mn>3</mn>
+    </msup>
+    <msub>
+      <mi>d</mi>
+      <mrow>
+        <mn>0</mn>
+      </mrow>
+    </msub>
+  </math> 
+  <math display="block">
+    <msub>
+      <mi>d</mi>
+      <mrow>
+        <mn>3</mn>
+      </mrow>
+    </msub>
+
+    <mo>=</mo>
+
+    <msup>
+      <mi>z</mi>
+      <mn>3</mn>
+    </msup>
+    <msub>
+      <mi>d</mi>
+      <mrow>
+        <mn>0</mn>
+      </mrow>
+    </msub>
+
+    <mo>+</mo>
+    
+    <msup>
+      <mi>z</mi>
+      <mn>2</mn>
+    </msup>
+    <mi>w</mi>
+    <msub>
+      <mi>d</mi>
+      <mrow>
+        <mn>0</mn>
+      </mrow>
+    </msub>
+
+    <mo>+</mo>
+
+    <mi>z</mi>
+    <msup>
+      <mi>w</mi>
+      <mn>2</mn>
+    </msup>
+    <msub>
+      <mi>d</mi>
+      <mrow>
+        <mn>0</mn>
+      </mrow>
+    </msub>
+
+    <mo>+</mo>
+
+    <msup>
+      <mi>w</mi>
+      <mn>3</mn>
+    </msup>
+    <msub>
+      <mi>d</mi>
+      <mrow>
+        <mn>0</mn>
+      </mrow>
+    </msub>
+  </math>
+</p>
+<p>
+  A pattern is starting to appear. The power of the
+  <math>
+    <mi>z</mi>
+  </math>
+  in each term goes down starting from
+  <math>
+    <mi>n</mi>
+  </math>
+  to 0. Also, the power of
+  <math>
+    <mi>w</mi>
+  </math>
+  in each term goes from 0 to
+  <math>
+    <mi>n</mi>
+  </math>.
+  Finally, each term has a single
+  <math>
+    <msub>
+      <mi>d</mi>
+      <mn>0</mn>
+    </msub>
+  </math>
+  in it. Let's factor that out and rewrite the equation with these patterns in
+  mind.
+</p>
+<math display="block">
+  <msub>
+    <mi>d</mi>
+    <mi>n</mi>
+  </msub>
+
+  <mo>=</mo>
+
+  <msub>
+    <mi>d</mi>
+    <mn>0</mn>
+  </msub>
+
+  <mo>(</mo>
+  <msup>
+    <mi>z</mi>
+    <mi>n</mi>
+  </msup>
+
+  <mo>+</mo>
+
+  <msup>
+    <mi>z</mi>
+    <mrow>
+      <mi>n</mi>
+
+      <mo>-</mo>
+
+      <mn>1</mn>
+    </mrow>
+  </msup>
+  <mi>w</mi>
+
+  <mo>+</mo>
+
+  <msup>
+    <mi>z</mi>
+    <mrow>
+      <mi>n</mi>
+
+      <mo>-</mo>
+
+      <mn>2</mn>
+    </mrow>
+  </msup>
+  <msup>
+    <mi>w</mi>
+    <mn>2</mn>
+  </msup>
+
+  <mo>+</mo>
+
+  <msup>
+    <mi>z</mi>
+    <mrow>
+      <mi>n</mi>
+
+      <mo>-</mo>
+
+      <mn>3</mn>
+    </mrow>
+  </msup>
+  <msup>
+    <mi>w</mi>
+    <mn>3</mn>
+  </msup>
+
+  <mo>+</mo>
+
+  <mo>&#x2026;</mo>
+
+  <mo>+</mo>
+
+  <msup>
+    <mi>w</mi>
+    <mi>n</mi>
+  </msup>
+  <mo>)</mo>
+</math>
+<h3>Geometric Series</h3>
+<p>
+  It turns out this equation is a type of geometric series. Each term has
+  the same base, but the exponents change. Let's isolate the geometric series
+  and call it
+  <math>
+    <mi>S</mi>
+  </math>.
+</p>
+<math display="block">
+  <mi>S</mi>
+
+  <mo>=</mo>
+
+  <msup>
+    <mi>z</mi>
+    <mi>n</mi>
+  </msup>
+
+  <mo>+</mo>
+
+  <msup>
+    <mi>z</mi>
+    <mrow>
+      <mi>n</mi>
+
+      <mo>-</mo>
+
+      <mn>1</mn>
+    </mrow>
+  </msup>
+  <mi>w</mi>
+
+  <mo>+</mo>
+
+  <msup>
+    <mi>z</mi>
+    <mrow>
+      <mi>n</mi>
+
+      <mo>-</mo>
+
+      <mn>2</mn>
+    </mrow>
+  </msup>
+  <msup>
+    <mi>w</mi>
+    <mn>2</mn>
+  </msup>
+
+  <mo>+</mo>
+
+  <msup>
+    <mi>z</mi>
+    <mrow>
+      <mi>n</mi>
+
+      <mo>-</mo>
+
+      <mn>3</mn>
+    </mrow>
+  </msup>
+  <msup>
+    <mi>w</mi>
+    <mn>3</mn>
+  </msup>
+
+  <mo>+</mo>
+
+  <mo>&#x2026;</mo>
+
+  <mo>+</mo>
+
+  <msup>
+    <mi>w</mi>
+    <mi>n</mi>
+  </msup>
+</math>
+<p>
+  Watch what happens when we multiply
+  <math>
+    <mi>S</mi>
+  </math>
+  by
+  <math>
+    <msup>
+      <mi>z</mi>
+      <mrow>
+        <mo>-</mo>
+        <mn>1</mn>
+      </mrow>
+    </msup>
+    <mi>w</mi>
+  </math>
+</p>
+<math display="block">
+  <msup>
+    <mi>z</mi>
+    <mrow>
+      <mo>-</mo>
+      <mn>1</mn>
+    </mrow>
+  </msup>
+  <mi>w</mi>
+  <mi>S</mi>
+
+  <mo>=</mo>
+
+  <msup>
+    <mi>z</mi>
+    <mrow>
+      <mi>n</mi>
+      <mo>-</mo>
+      <mn>1</mn>
+    </mrow>
+  </msup>
+  <mi>w</mi>
+
+  <mo>+</mo>
+
+  <msup>
+    <mi>z</mi>
+    <mrow>
+      <mi>n</mi>
+
+      <mo>-</mo>
+
+      <mn>2</mn>
+    </mrow>
+  </msup>
+  <msup>
+    <mi>w</mi>
+    <mn>2</mn>
+  </msup>
+
+  <mo>+</mo>
+
+  <msup>
+    <mi>z</mi>
+    <mrow>
+      <mi>n</mi>
+
+      <mo>-</mo>
+
+      <mn>3</mn>
+    </mrow>
+  </msup>
+  <msup>
+    <mi>w</mi>
+    <mn>3</mn>
+  </msup>
+
+  <mo>+</mo>
+
+  <msup>
+    <mi>z</mi>
+    <mrow>
+      <mi>n</mi>
+
+      <mo>-</mo>
+
+      <mn>4</mn>
+    </mrow>
+  </msup>
+  <msup>
+    <mi>w</mi>
+    <mn>4</mn>
+  </msup>
+
+  <mo>+</mo>
+
+  <mo>&#x2026;</mo>
+
+  <mo>+</mo>
+
+  <msup>
+    <mi>z</mi>
+    <mrow>
+      <mo>-</mo>
+      <mn>1</mn>
+    </mrow>
+  </msup>
+  <msup>
+    <mi>w</mi>
+    <mrow>
+      <mi>n</mi>
+      <mo>+</mo>
+      <mn>1</mn>
+    </mrow>
+  </msup>
+</math >
+<p>
+  All the exponents changed, so what? Notice how this new series, is same
+  as the old one minus
+  <math>
+    <msup>
+      <mi>z</mi>
+      <mi>n</mi>
+    </msup>
+  </math> 
+  and plus
+  <math>
+    <msup>
+      <mi>z</mi>
+      <mrow>
+        <mo>-</mo>
+        <mn>1</mn>
+      </mrow>
+    </msup>
+    <msup>
+      <mi>w</mi>
+      <mrow>
+        <mi>n</mi>
+        <mo>+</mo>
+        <mn>1</mn>
+      </mrow>
+    </msup>
+  </math>.
+</p>
+<math display="block">
+  <msup>
+    <mi>z</mi>
+    <mrow>
+      <mo>-</mo>
+      <mn>1</mn>
+    </mrow>
+  </msup>
+  <mi>w</mi>
+  <mi>S</mi>
+
+  <mo>=</mo>
+
+  <mi>S</mi>
+  <mo>-</mo>
+
+  <msup>
+    <mi>z</mi>
+    <mi>n</mi>
+  </msup>
+
+  <mo>+</mo>
+  <msup>
+    <mi>z</mi>
+    <mrow>
+      <mo>-</mo>
+      <mn>1</mn>
+    </mrow>
+  </msup>
+  <msup>
+    <mi>w</mi>
+    <mrow>
+      <mi>n</mi>
+      <mo>+</mo>
+      <mn>1</mn>
+    </mrow>
+  </msup>
+</math>
+<p>
+  Now solve for
+  <math>
+    <mi>S</mi>
+  </math>.
+</p>
+
+<math display="block">
+  <mtable>
+    <mtr>
+      <mtd>
+        <msup>
+          <mi>z</mi>
+          <mrow>
+            <mo>-</mo>
+            <mn>1</mn>
+          </mrow>
+        </msup>
+        <mi>w</mi>
+        <mi>S</mi>
+
+        <mo>-</mo>
+        <mi>S</mi>
+      </mtd>
+      <mtd>
+        <mo>=</mo>
+      </mtd>
+      <mtd>
+        <mo>-</mo>
+
+        <msup>
+          <mi>z</mi>
+          <mi>n</mi>
+        </msup>
+
+        <mo>+</mo>
+        <msup>
+          <mi>z</mi>
+          <mrow>
+            <mo>-</mo>
+            <mn>1</mn>
+          </mrow>
+        </msup>
+        <msup>
+          <mi>w</mi>
+          <mrow>
+            <mi>n</mi>
+            <mo>+</mo>
+            <mn>1</mn>
+          </mrow>
+        </msup>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd>
+        <mo>(</mo>
+        <msup>
+          <mi>z</mi>
+          <mrow>
+            <mo>-</mo>
+            <mn>1</mn>
+          </mrow>
+        </msup>
+        <mi>w</mi>
+
+        <mo>-</mo>
+        <mn>1</mn>
+        <mo>)</mo>
+
+        <mi>S</mi>
+      </mtd>
+      <mtd>
+        <mo>=</mo>
+      </mtd>
+      <mtd>
+        <mo>-</mo>
+
+        <msup>
+          <mi>z</mi>
+          <mi>n</mi>
+        </msup>
+
+        <mo>+</mo>
+        <msup>
+          <mi>z</mi>
+          <mrow>
+            <mo>-</mo>
+            <mn>1</mn>
+          </mrow>
+        </msup>
+        <msup>
+          <mi>w</mi>
+          <mrow>
+            <mi>n</mi>
+            <mo>+</mo>
+            <mn>1</mn>
+          </mrow>
+        </msup>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd>
+        <mi>S</mi>
+      </mtd>
+      <mtd>
+        <mi>=</mi>
+      </mtd>
+      <mtd>
+        <mfrac>
+          <mrow>
+            <mo>-</mo>
+
+            <msup>
+              <mi>z</mi>
+              <mi>n</mi>
+            </msup>
+
+            <mo>+</mo>
+            <msup>
+              <mi>z</mi>
+              <mrow>
+                <mo>-</mo>
+                <mn>1</mn>
+              </mrow>
+            </msup>
+            <msup>
+              <mi>w</mi>
+              <mrow>
+                <mi>n</mi>
+                <mo>+</mo>
+                <mn>1</mn>
+              </mrow>
+            </msup>
+          </mrow>
+          <mrow>
+            <msup>
+              <mi>z</mi>
+              <mrow>
+                <mo>-</mo>
+                <mn>1</mn>
+              </mrow>
+            </msup>
+            <mi>w</mi>
+
+            <mo>-</mo>
+            <mn>1</mn>
+          </mrow>
+        </mfrac>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd>
+      </mtd>
+      <mtd>
+        <mo>=</mo>
+      </mtd>
+      <mtd>
+        <mfrac><mrow><msup><mi>z</mi><mrow><mo>-</mo><mn>1</mn></mrow></msup><mo>(</mo><mo>-</mo><msup><mi>z</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>+</mo><msup><mi>w</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>)</mo></mrow><mrow><msup><mi>z</mi><mrow><mo>-</mo><mn>1</mn></mrow></msup><mo>(</mo><mi>w</mi><mo>-</mo><mi>z</mi><mo>)</mo></mrow></mfrac>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd></mtd>
+      <mtd>
+        <mo>=</mo>
+      </mtd>
+      <mtd>
+        <mfrac><mrow><mo>-</mo><msup><mi>z</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>+</mo><msup><mi>w</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow><mrow><mi>w</mi><mo>-</mo><mi>z</mi></mrow></mfrac>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd></mtd>
+      <mtd>
+        <mo>=</mo>
+      </mtd>
+      <mtd>
+        <mfrac><mrow><msup><mi>z</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>-</mo><msup><mi>w</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow><mrow><mi>z</mi><mo>-</mo><mi>w</mi></mrow></mfrac>
+      </mtd>
+    </mtr>
+  </mtable>
+</math>
+<p>
+  Finally, if we plug everything back in, we have a closed-form solution for our
+  debt.
+</p>
+<math display="block">
+  <mrow><mi>d</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow>mrow><mo>=</mo><msub><mi>d</mi><mn>0</mn></msub><mfrac><mrow><msup><mi>z</mi><mrow><mi>x</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>-</mo><msup><mi>w</mi><mrow><mi>x</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow><mrow><mi>z</mi><mo>-</mo><mi>w</mi></mrow></mfrac>
+</math>
+<h3>Debt-to-Equity Ratio</h3>
+<p>
+  Now to find our debt-to-equity ratio at time
+  <math>
+    <mi>x</mi>
+  </math>
+  our function is simply debt over equity.
+</p>
+<math display="block">
+  <mfrac><mrow><mi>d</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow><mrow><mi>q</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow></mfrac>
+</math>
+<h3>To be continued...</h3>
+<p>
+  To find the maximum debt-to-equity ratio, you need to use some calculus. I'll
+  write that tutorial another time.
 </p>
 <p>Created by Log</p>
 <script>
   function update() {
-    returns = document.getElementById('returns').value / 100 + 1;
-    interest = document.getElementById('interest').value / 100 + 1;
-    inflation = document.getElementById('inflation').value / 100 + 1;
-    expenses = document.getElementById('expenses').value;
-    equity = document.getElementById('equity').value;
+    returns = document.getelementbyid('returns').value / 100 + 1;
+    interest = document.getelementbyid('interest').value / 100 + 1;
+    inflation = document.getelementbyid('inflation').value / 100 + 1;
+    expenses = document.getelementbyid('expenses').value;
+    equity = document.getelementbyid('equity').value;
 
     years = Math.log(Math.log(inflation / returns) /
       Math.log(interest / returns)) /
